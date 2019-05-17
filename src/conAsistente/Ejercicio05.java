@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Font;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class Ejercicio05 {
 
@@ -35,7 +37,6 @@ public class Ejercicio05 {
   private JTextField cajaRuta2;
   private JTextField cajaRuta3;
   private JButton botonFusionar;
-  private JTextField cajaContenidoResultante;
   File fichero1;
   File fichero2;
   File fichero3;
@@ -185,16 +186,23 @@ public class Ejercicio05 {
     etiquetaResultado.setFont(new Font("Tahoma", Font.PLAIN, 18));
     etiquetaResultado.setBounds(33, 131, 100, 25);
     frmIntercalaLineas.getContentPane().add(etiquetaResultado);
-    
-    cajaContenidoResultante = new JTextField();
-    cajaContenidoResultante.setEditable(false);
-    cajaContenidoResultante.setBounds(33, 156, 826, 339);
-    frmIntercalaLineas.getContentPane().add(cajaContenidoResultante);
-    cajaContenidoResultante.setColumns(10);
     botonSalir.setBounds(89, 530, 133, 32);
     frmIntercalaLineas.getContentPane().add(botonSalir);
     
+    JTextArea cajaContenidoResultante = new JTextArea();
+    cajaContenidoResultante.setEditable(false);
+    cajaContenidoResultante.setBounds(33, 156, 826, 339);
+    frmIntercalaLineas.getContentPane().add(cajaContenidoResultante);
+    
+    JScrollPane scrollPane = new JScrollPane(cajaContenidoResultante,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    scrollPane.setBounds(33, 156, 826, 339);
+    frmIntercalaLineas.getContentPane().add(scrollPane);
+    
+    
+    
     botonFusionar = new JButton("Fusionar");
+    botonFusionar.setBounds(704, 530, 133, 32);
+    frmIntercalaLineas.getContentPane().add(botonFusionar);
     botonFusionar.addActionListener(new ActionListener() {
     private BufferedReader br1;
     private BufferedReader br2;
@@ -247,7 +255,7 @@ public class Ejercicio05 {
               contenidoFichero3 += linea+"\n";
             }   
           }
-          cajaContenidoResultante.setText(contenidoFichero3);
+          cajaContenidoResultante.append(contenidoFichero3);
           br1.close();
           br2.close();
           br3.close();
@@ -258,8 +266,8 @@ public class Ejercicio05 {
         
       }
     });
-    botonFusionar.setBounds(704, 530, 133, 32);
-    frmIntercalaLineas.getContentPane().add(botonFusionar);
+    
+    
     
   }
 }
